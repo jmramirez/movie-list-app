@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using movie_app_list.Models;
 
 namespace movie_app_list
 {
@@ -23,6 +25,10 @@ namespace movie_app_list
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<MvcMovieContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("MovieContext"), new MySqlServerVersion(new Version(8,0,27))
+                ));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
