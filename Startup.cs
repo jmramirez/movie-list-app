@@ -26,8 +26,8 @@ namespace movie_app_list
         {
             services.AddControllersWithViews();
             services.AddDbContext<MvcMovieContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MovieContext"), new MySqlServerVersion(new Version(8,0,27))
-                ));
+                options.UseNpgsql(Configuration.GetConnectionString("MovieContext"))
+            );
 
         }
 
